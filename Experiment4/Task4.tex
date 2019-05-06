@@ -1,0 +1,450 @@
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and export to LaTeX again.
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{epstopdf}
+\usepackage[table]{xcolor}
+\usepackage{matlab}
+
+\sloppy
+\epstopdfsetup{outdir=./}
+\graphicspath{ {./Task4_images/} }
+
+\matlabhastoc
+
+\begin{document}
+
+\label{T_2CE43835}
+\matlabtitle{实验四　非线性规划}
+
+\matlabtableofcontents{目录}
+
+\label{H_A869CAEA}
+\matlabheading{例题}
+
+\label{H_93CDF4CB}
+\matlabheadingtwo{【例题1】解非线性规划：}
+
+\begin{par}
+$$\mathrm{min}\;f=-x_1 -2x_2 +\frac{1}{2}x_1^2 +\frac{1}{2}x_2^2$$
+\end{par}
+
+\begin{par}
+$$s\ldotp t\ldotp \left\lbrace \begin{array}{c}
+2x_1 +3x_2 =6\\
+x_1 +4x_2 \le 5\\
+x_1 ,x_2 \ge 0
+\end{array}\right.$$
+\end{par}
+
+\begin{matlabcode}
+func3 = @(x)-x(1)-2*x(2)+(1/2)*x(1)^2+(1/2)*x(2)^2;
+x0 = [1; 1];
+A = [2 3; 1 4];
+b = [6; 5];
+lb = zeros(2, 1);
+[x, fval] = fmincon(func3, x0, A, b, [], [], lb, [])
+\end{matlabcode}
+\begin{matlaboutput}
+Local minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+<stopping criteria details>
+x = 2x1    
+    0.7647
+    1.0588
+
+fval = -2.0294
+\end{matlaboutput}
+
+
+\label{H_49C2E8F8}
+\matlabheadingtwo{【例题2】解非线性规划：}
+
+\label{H_F9CBF4C8}
+\begin{par}
+$$\mathrm{min}\;f\left(X\right)=e^{x_1 } \left(4x_1^2 +2x_2^2 +4x_1 x_2 +2x_2 +1\right)$$
+\end{par}
+
+\begin{par}
+$$s\ldotp t\ldotp \left\lbrace \begin{array}{c}
+x_1 +x_2 =0\\
+1\ldotp 5+x_1 x_2 -x_1 -x_2 \le 0\\
+-x_1 x_2 -10\le 0
+\end{array}\right.$$
+\end{par}
+
+\begin{matlabcode}
+func4 = @(x)exp(x(1))*(4*x(1)^2+2*x(2)^2+4*x(1)*x(2)+2*x(2)+1);
+x0 = [-1; 1];
+Aeq = [1 1];
+beq = 0;
+[x, fval] = fmincon(func4, x0, [], [], Aeq, beq, [], [], @mycon)
+\end{matlabcode}
+\begin{matlaboutput}
+Local minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+<stopping criteria details>
+x = 2x1    
+   -3.1623
+    3.1623
+
+fval = 1.1566
+\end{matlaboutput}
+
+
+\label{H_9F5B12D0}
+\matlabheadingtwo{【例题3】解非线性规划：}
+
+\label{H_6CD110CB}
+\begin{par}
+$$\mathrm{min}\;f\left(X\right)=-2x_1 -x_2$$
+\end{par}
+
+\begin{par}
+$$s\ldotp t\ldotp \left\lbrace \begin{array}{c}
+g_1 \left(X\right)=25-x_1^2 -x_2^2 \ge 0\\
+g_2 \left(X\right)=7-x_1^2 +x_2^2 \ge 0\\
+0\le x_1 \le 5\\
+0\le x_2 \le 10
+\end{array}\right.$$
+\end{par}
+
+\begin{matlabcode}
+fun = @(x)-2*x(1)-x(2);
+x0 = [3; 2.5];
+lb = [0; 0];
+ub = [5; 10];
+[x, fval, exitflag, ~] = fmincon(fun, x0, [], [], [], [], lb, ub, @mycon2)
+\end{matlabcode}
+\begin{matlaboutput}
+Local minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+<stopping criteria details>
+x = 2x1    
+    4.0000
+    3.0000
+
+fval = -11.0000
+exitflag = 1
+\end{matlaboutput}
+
+
+\label{H_3DDE0CD0}
+\matlabheading{习题}
+
+\label{H_8DF4B92F}
+\matlabheadingtwo{2. 炼油厂将A、B、C三种原油加工成甲、乙、丙三种汽油，一桶原油加工成一桶汽油的费用为4元，每天至多能加工汽油14000桶。原油的买入价、买入量、辛烷值、硫含量，及汽油的卖出价、需求量、辛烷值、硫含量由表给出。如何安排生产计划，使利润最大？}
+
+\label{H_B5CB682C}
+\begin{par}
+$$\mathrm{max}\;f=380000-49x_1 -49x_2 -49x_3 -39y_1 -39y_2 -39y_3 -29z_1 -29z_2 -29z_3$$
+\end{par}
+
+\begin{par}
+$$s\ldotp t\ldotp \left\lbrace \begin{array}{c}
+x_1 +x_2 +x_3 +y_1 +y_2 +y_3 +z_1 +z_2 +z_3 \le 14000\\
+x_1 +x_2 +x_3 \le 5000\\
+y_1 +y_2 +y_3 \le 5000\\
+z_1 +z_2 +z_3 \le 5000\\
+x_1 +y_1 +z_1 \ge 3000\\
+x_2 +y_2 +z_2 \ge 2000\\
+x_3 +y_3 +z_3 \ge 1000\\
+2%x_1 -4%y_1 -2%z_1 \ge 0\\
+10%x_2 +4%y_2 +6%z_2 \ge 0\\
+6%x_3 +2%z_3 \ge 0
+\end{array}\right.$$
+\end{par}
+
+\begin{par}
+$$s\ldotp t\ldotp \left\lbrace \begin{array}{c}
+-0\ldotp 5%x_1 +1%y_1 +2%z_1 \le 0\\
+-1\ldotp 5%x_2 +1%z_2 \le 0\\
+-0\ldotp 5x_3 +1%y_3 +2%z_3 \le 0
+\end{array}\right.$$
+\end{par}
+
+\begin{matlabcode}
+f = [49 49 49 39 39 39 29 29 29];
+A = [
+    1 1 1 1 1 1 1 1 1;
+    1 1 1 0 0 0 0 0 0;
+    0 0 0 1 1 1 0 0 0;
+    0 0 0 0 0 0 1 1 1;
+    -1 0 0 -1 0 0 -1 0 0;
+    0 -1 0 0 -1 0 0 -1 0;
+    0 0 -1 0 0 -1 0 0 -1;
+    -2 0 0 4 0 0 -2 0 0;
+    0 -10 0 0 -4 0 0 -6 0;
+    0 0 -6 0 0 0 0 0 -2;
+    
+    -0.5 0 0 1 0 0 2 0 0;
+    0 -1.5 0 0 0 0 0 1 0;
+    0 0 -0.5 0 0 1 0 0 2;
+];
+b = [
+    14000; 5000; 5000; 5000; -3000; -2000; -1000; 0; 0; 0;
+    0; 0; 0;
+];
+[x, fval] = intlinprog(f, 1 : 9,  A, b, [], [], zeros(9, 1));
+\end{matlabcode}
+\begin{matlaboutput}
+LP:                Optimal objective value is 254000.000000.                                        
+
+
+Optimal solution found.
+
+Intlinprog stopped at the root node because the objective value is within a gap tolerance of the optimal value,
+options.AbsoluteGapTolerance = 0 (the default value). The intcon variables are integer within tolerance,
+options.IntegerTolerance = 1e-05 (the default value).
+\end{matlaboutput}
+\begin{matlabcode}
+x, (38000 - fval)
+\end{matlabcode}
+\begin{matlaboutput}
+x = 9x1    
+1.0e+03 *
+
+    2.4000
+    0.8000
+    0.8000
+         0
+         0
+         0
+    0.6000
+    1.2000
+    0.2000
+
+ans = -2.1600e+05
+\end{matlaboutput}
+
+\label{H_E4C5A967}
+\matlabheadingtwo{　　一般来说，做广告可以增加销售，估计一天向一种汽油投入一元广告费，可使该汽油日销量增加10桶，且每天最多投入广告费800元。问：如何安排生产和广告计划使利润最大？}
+
+\label{H_B5CB682C}
+\begin{par}
+$$\mathrm{max}\;f=380000-49x_1 -49x_2 -49x_3 -39y_1 -39y_2 -39y_3 -29z_1 -29z_2 -29z_3 +699p_a +599p_b +499p_c$$
+\end{par}
+
+\begin{par}
+$$s\ldotp t\ldotp \left\lbrace \begin{array}{c}
+x_1 +x_2 +x_3 +y_1 +y_2 +y_3 +z_1 +z_2 +z_3 \le 14000\\
+x_1 +x_2 +x_3 \le 5000\\
+y_1 +y_2 +y_3 \le 5000\\
+z_1 +z_2 +z_3 \le 5000\\
+x_1 +y_1 +z_1 -10p_a \ge 3000\\
+x_2 +y_2 +z_2 -10p_b \ge 2000\\
+x_3 +y_3 +z_3 -10p_c \ge 1000\\
+2%x_1 -4%y_1 -2%z_1 \ge 0\\
+10%x_2 +4%y_2 +6%z_2 \ge 0\\
+6%x_3 +2%z_3 \ge 0
+\end{array}\right.$$
+\end{par}
+
+\begin{par}
+$$s\ldotp t\ldotp \left\lbrace \begin{array}{c}
+-0\ldotp 5%x_1 +1%y_1 +2%z_1 \le 0\\
+-1\ldotp 5%x_2 +1%z_2 \le 0\\
+-0\ldotp 5x_3 +1%y_3 +2%z_3 \le 0
+\end{array}\right.$$
+\end{par}
+
+\begin{matlabcode}
+f = [49 49 49 39 39 39 29 29 29 -699 -599 -499];
+A = [
+    1 1 1 1 1 1 1 1 1 0 0 0;
+    1 1 1 0 0 0 0 0 0 0 0 0;
+    0 0 0 1 1 1 0 0 0 0 0 0;
+    0 0 0 0 0 0 1 1 1 0 0 0;
+    -1 0 0 -1 0 0 -1 0 0 10 0 0;
+    0 -1 0 0 -1 0 0 -1 0 0 10 0;
+    0 0 -1 0 0 -1 0 0 -1 0 0 10;
+    -2 0 0 4 0 0 -2 0 0 0 0 0;
+    0 -10 0 0 -4 0 0 -6 0 0 0 0;
+    0 0 -6 0 0 0 0 0 -2 0 0 0;
+    
+    -0.5 0 0 1 0 0 2 0 0 0 0 0;
+    0 -1.5 0 0 0 0 0 1 0 0 0 0;
+    0 0 -0.5 0 0 1 0 0 2 0 0 0;
+];
+b = [
+    14000; 5000; 5000; 5000; -3000; -2000; -1000; 0; 0; 0;
+    0; 0; 0;
+];
+[x, fval] = intlinprog(f, 1 : 12,  A, b, [], [], zeros(12, 1));
+\end{matlabcode}
+\begin{matlaboutput}
+LP:                Optimal objective value is 92250.000000.                                         
+
+
+Optimal solution found.
+
+Intlinprog stopped at the root node because the objective value is within a gap tolerance of the optimal value,
+options.AbsoluteGapTolerance = 0 (the default value). The intcon variables are integer within tolerance,
+options.IntegerTolerance = 1e-05 (the default value).
+\end{matlaboutput}
+\begin{matlabcode}
+x, (38000 - fval)
+\end{matlabcode}
+\begin{matlaboutput}
+x = 12x1     行 2:11
+1.0e+03 *
+
+    2.2000
+    0.8000
+    1.0000
+    4.0000
+         0
+         0
+    3.3000
+    0.2000
+         0
+    0.7500
+
+ans = -5.4250e+04
+\end{matlaboutput}
+
+
+\label{H_1B7B9F06}
+\matlabheadingtwo{3. 要设计和发射一个带有X射线望远镜和其他学科仪器的气球。对于性能的粗糙的度量方法是以气球所能到达的高度和所携仪器的重量来表达，很清楚，高度本身是气球体积的一个函数。根据过去的经验作出的结论，是求极大满意性能函数$P=f\left(V,W\right)=100V-0\ldotp 3V^2 +80W-0\ldotp 2W^2$，此处$V$是体积，$W$是仪器重量。承包项目的预算限额为1040美元，与体积$V$有关的费用是$2V$，与设备有关的费用是$4W$，为了保证在高度方面的性能与科学设备方面的性能之间的合理平衡，设计者要求满足约束条件$80W\ge 100V$。找出由体积和设备重量来表达的最优设计，并用线性化方法求解。}
+
+\label{H_54B1B44B}
+\begin{matlabcode}
+% 记最优体积为x(1)，最优重量为x(2)
+func = @(x)(100*x(1)-0.3*x(1)^2+80*x(2)-0.2*x(2)^2);
+Aeq = [2 4;
+    100 -80];
+beq = [1040; 0];
+[x, fval] = fmincon(func, zeros(2, 1), [], [], Aeq, beq, zeros(2, 1), [])
+\end{matlabcode}
+\begin{matlaboutput}
+Local minimum possible. Constraints satisfied.
+
+fmincon stopped because the size of the current step is less than
+the value of the step size tolerance and constraints are 
+satisfied to within the value of the constraint tolerance.
+
+<stopping criteria details>
+x = 2x1    
+  148.5714
+  185.7143
+
+fval = 1.6194e+04
+\end{matlaboutput}
+
+
+\label{H_3B3E4D97}
+\matlabheadingtwo{4. 某厂向用户提供发动机，合同规定，第一、二、三季度末分别交货40台、60台、80台。每季度的生产费用为$f\left(x\right)=\mathit{ax}+{\mathit{bx}}^2$（元），其中$x$是该季度生产的发动机台数。若交货后有剩余，可用于下季度交货，但需支付存储费，每台每季度$c$元。已知工厂每季度最大生产能力为100台，第一季度开始时无存货，设$a=50$，$b=0\ldotp 2$，$c=4$，问工厂应如何安排生产计划，才能既满足合同又使总费用最低？讨论$a$，$b$，$c$变化对计划的影响，并作出合理的解释。}
+
+\begin{matlabcode}
+% 记第k季度生产x(k)台设备
+func = @(x)(58*x(1)+54*x(2)+50*x(3)+0.2.*sum(x.^2)-640);
+A = [-1 0 0;
+    -1 -1 0;
+    -1 -1 -1];
+b = [-40; -100; -180];
+[x, fval] = fmincon(func, zeros(3, 1), A, b, [], [], [40; 0; 0], repmat(100, 3, 1))
+\end{matlabcode}
+\begin{matlaboutput}
+Local minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+<stopping criteria details>
+x = 3x1    
+   50.0000
+   60.0000
+   70.0000
+
+fval = 1.1200e+04
+\end{matlaboutput}
+
+
+\label{H_C44CB4C9}
+\matlabheadingtwo{5. 钢管下料问题。}
+
+\label{H_8B319A5F}
+\begin{par}
+\begin{flushleft}
+　　某钢管零售商从钢管厂进货，将钢管按照顾客的要求切割出售。从钢管厂进货得到的原材料钢管的长度都是1850mm，现在以顾客需要15根290mm、28根315mm、21根350mm和30根455mm的钢管。为了简化生产过程，规定所使用的切割模式的种类不能超过4种，使用频率最高的一种切割模式按照一根原料钢管价值的$\frac{1}{10}$增加费用，使用频率次之的切割模式按照一根原料钢管价值的$\frac{2}{10}$增加费用，以此类推，且每种切割模式下的切割次数不能太多（一根原料钢管最多生产5根产品），此外，为了减少余料浪费，每种切割模式下的余料浪费不能超过100mm，为了使总费用最小，应该如何下料？
+\end{flushleft}
+\end{par}
+
+\begin{par}
+$$\mathrm{min}\;f=1\ldotp 1x_1 +1\ldotp 2x_2 +1\ldotp 3x_3 +1\ldotp 4x_4$$
+\end{par}
+
+\begin{par}
+$$s\ldotp t\ldotp \left\lbrace \begin{array}{c}
+\left\lbrace \begin{array}{c}
+r_{11} x_1 +r_{12} x_2 +r_{13} x_3 +r_{14} x_4 \ge 15\\
+r_{21} x_1 +r_{22} x_2 +r_{23} x_3 +r_{24} x_4 \ge 28\\
+r_{31} x_1 +r_{32} x_2 +r_{33} x_3 +r_{34} x_4 \ge 21\\
+r_{41} x_1 +r_{42} x_2 +r_{43} x_3 +r_{44} x_4 \ge 15
+\end{array}\right.\\
+\left\lbrace \begin{array}{c}
+1750\le 290r_{11} +315r_{21} +350r_{31} +455r_{41} \le 1850\\
+1750\le 290r_{12} +315r_{22} +350r_{32} +455r_{42} \le 1850\\
+1750\le 290r_{13} +315r_{23} +350r_{33} +455r_{43} \le 1850\\
+1750\le 290r_{14} +315r_{24} +350r_{34} +455r_{44} \le 1850
+\end{array}\right.\\
+x_1 \ge x_2 \ge x_3 \ge x_4 \\
+\left\lbrace \begin{array}{c}
+\frac{15\times 290+28\times 315+21\times 350+30\times 455}{1850}\ge 18\ldotp 47\\
+\frac{15\times 290+28\times 315+21\times 350+30\times 455}{1750}\le 19\ldotp 525
+\end{array}\right.\\
+\left\lbrace \begin{array}{c}
+r_{11} +r_{21} +r_{31} +r_{41} \le 5\\
+r_{12} +r_{22} +r_{32} +r_{42} \le 5\\
+r_{13} +r_{23} +r_{33} +r_{43} \le 5\\
+r_{14} +r_{24} +r_{34} +r_{44} \le 5
+\end{array}\right.
+\end{array}\right.$$
+\end{par}
+
+\begin{matlabcode}
+%%%%% 这道题不会，所以没写 %%%%%
+\end{matlabcode}
+
+
+\label{H_B1F350E7}
+\matlabheading{附录　本实验可能用到的函数}
+
+\label{H_B10BF39F}
+\begin{matlabcode}
+function [c, ceq] = mycon(x)
+%% 例题2的非线性限制
+c = [1.5+x(1)*x(2)-x(1)-x(2); -x(1)*x(2)-10];
+ceq = [];
+end
+function [c, ceq] = mycon2(x)
+%% 例题3的非线性限制
+c = [x(1)^2+x(2)^2-25; x(1)^2-x(2)^2-7];
+ceq = [];
+end
+\end{matlabcode}
+
+\end{document}
