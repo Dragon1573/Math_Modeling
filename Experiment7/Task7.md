@@ -8,30 +8,100 @@
 
 1. **常系数线性齐次差分方程的解法**
 
-    &emsp;&emsp;形如
-    $$
-    a_n + b_1a_{n-1} + b_2a_{n-2} + \dotsb + b_ka_{n-k} = 0
-    $$ (1)
-    的差分方程，称为$\{a_n\}$的**k阶常系数线性齐次差分方程**，其中$b_i$为常数，$b_k \neq 0$，$n \geq k$。方程
-    $$ x^k +b_1x^{k-1} + \dotsb + b_k = 0 $$ (2)
-    称为差分方程(1)的**特征方程**，其根称为**特征根**。
+   &emsp;&emsp;形如
+   $$
+   a_n + b_1a_{n-1} + b_2a_{n-2} + \dotsb + b_ka_{n-k} = 0
+   $$
+   的差分方程，称为$\{a_n\}$的**k阶常系数线性齐次差分方程**，其中$b_i$为常数，$b_k \neq 0$，$n \geq k$。方程
+   $$
+   x^k +b_1x^{k-1} + \dotsb + b_k = 0
+   $$
+   称为差分方程的**特征方程**，其根称为**特征根**。
 
-    1. 单根（所有根互异）
+   1. 单根（所有根互异）
 
-        &emsp;&emsp;差分方程$a_n + b_1a_{n-1} + b_2a_{n-2} + \dotsb + b_ka_{n-k} = 0,b_k \neq 0$的特征方程$x^k +b_1x^{k-1} + \dotsb + b_k = 0$有$k$个相异的特征根$x_1,x_2, \dotsb ,x_k$，则$a_n=c_1x_1^n+c_2x_2^n+ \dotsb + c_kx_k^n$是一个同届，其中$c_1,c_2, \dotsb ,c_k$为任意常数，且由一组初值条件
-        $$a_0=u_0，a_1=u_1，\dotsb，a_{k-1}=u{k-1}$$
-        可确定一个满足初始条件的特解。
+      &emsp;&emsp;差分方程
 
-    2. 重根（存在相同的根）
+      $$
+      a_n + b_1a_{n-1} + b_2a_{n-2} + \dotsb + b_ka_{n-k} = 0,b_k \neq 0
+      $$
 
-        &emsp;&emsp;差分方程$a_n + b_1a_{n-1} + b_2a_{n-2} + \dotsb + b_ka_{n-k} = 0,b_k \neq 0$的特征方程$x^k +b_1x^{k-1} + \dotsb + b_k = 0$的相异特征根$x_1,x_2, \dotsb ,x_t$，重数依次为$m_1,m_2, \dotsb ,m_t,m_1+m_2+ \dotsb +m_t=k$，则差分方程的通解为
-        $$ a_n= \sum_{j=1}^{m_1}{c_{1j}n^{j-1}x_1^n}+ \sum_{j=1}^{m_1}{c_{2j}n^{j-1}x_2^n}+ \sum_{j=1}^{m_1}{c_{tj}n^{j-1}x_t^n} $$
+      的特征方程
 
-    3. 共轭复根（根存在成对的共轭复数）
+      $$
+      x^k +b_1x^{k-1} + \dotsb + b_k = 0
+      $$
 
-        &emsp;&emsp;差分方程$a_n + b_1a_{n-1} + b_2a_{n-2} + \dotsb + b_ka_{n-k} = 0,b_k \neq 0$的特征方程$x^k +b_1x^{k-1} + \dotsb + b_k = 0$的特征根出现一堆共轭复根$x_1= \delta+i\omega,x_2= \delta-i\omega$和相异的$k-2$个根$x_3,x_4, \dotsb ,x_t$，则差分方程的通解为
-        $$ a_n=c_1\rho^n\cos{n\theta}+c_2 \rho^n \sin{n\theta}+c_3x_3^n+\dotsb+c_kx_k^n $$
-        其中$\rho=\sqrt{\delta^2+\omega^2},\theta=\arctan{\frac{\omega}{\delta}}$。
+      有$k$个相异的特征根$x_1,x_2, \dotsb ,x_k$，则
+
+      $$
+      a_n=c_1x_1^n+c_2x_2^n+ \dotsb + c_kx_k^n
+      $$
+
+      是一个通解，其中$c_1,c_2, \dotsb ,c_k$为任意常数，且由一组初值条件
+
+      $$
+      a_0 = u_0，a_1 = u_1，\dotsb，a_{k-1} = u{k-1}
+      $$
+
+      可确定一个满足初始条件的特解。
+
+   2. 重根（存在相同的根）
+
+      &emsp;&emsp;差分方程
+
+      $$
+      a_n + b_1a_{n-1} + b_2a_{n-2} + \dotsb + b_ka_{n-k} = 0,b_k \neq 0
+      $$
+
+      的特征方程
+
+      $$
+      x^k +b_1x^{k-1} + \dotsb + b_k = 0
+      $$
+
+      的相异特征根$x_1,x_2, \dotsb ,x_t$，重数依次为
+
+      $$
+      m_1,m_2, \dotsb ,m_t,m_1+m_2+ \dotsb +m_t=k
+      $$
+
+      则差分方程的通解为
+
+      $$
+      a_n= \sum_{j=1}^{m_1}{c_{1j}n^{j-1}x_1^n}+ \sum_{j=1}^{m_1}{c_{2j}n^{j-1}x_2^n}+ \sum_{j=1}^{m_1}{c_{tj}n^{j-1}x_t^n}
+      $$
+
+   3. 共轭复根（根存在成对的共轭复数）
+      &emsp;&emsp;差分方程
+
+      $$
+      a_n + b_1a_{n-1} + b_2a_{n-2} + \dotsb + b_ka_{n-k} = 0,b_k \neq 0
+      $$
+
+      的特征方程
+
+      $$
+      x^k +b_1x^{k-1} + \dotsb + b_k = 0
+      $$
+
+      的特征根出现一对共轭复根
+
+      $$
+      x_1= \delta+i\omega,x_2= \delta-i\omega
+      $$
+
+      和相异的$k-2$个根$x_3,x_4, \dotsb ,x_t$，则差分方程的通解为
+
+      $$
+      a_n=c_1\rho^n\cos{n\theta}+c_2 \rho^n \sin{n\theta}+c_3x_3^n+\dotsb+c_kx_k^n
+      $$
+
+      其中
+
+      $$
+      \rho=\sqrt{\delta^2+\omega^2},\theta=\arctan{\frac{\omega}{\delta}}
+      $$
 
 2. **常系数线性非齐次差分方程的解法**
 
