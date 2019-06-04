@@ -17,5 +17,5 @@
 * [实验五](https://drogon1573.github.io/Math_Modeling/Experiment5/Task5.html)
 * [实验六](https://drogon1573.github.io/Math_Modeling/Experiment6/Task6.html)
 * [实验七](https://github.com/Drogon1573/Math_Modeling/blob/master/Experiment7/Task7.md)
-* [实验八](https://github.com/Drogon1573/Math_Modeling/blob/master/Experiment8/Task8.md)
-* [实验九](https://github.com/Drogon1573/Math_Modeling/blob/master/Experiment9/Task9.md)
+* [实验八](https://drogon1573.github.io/Math_Modeling/Experiment8/Task8.html)
+* [实验九](https://drogon1573.github.io/Math_Modeling/Experiment9/Task9.html)
