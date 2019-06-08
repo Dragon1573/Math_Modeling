@@ -1,8 +1,8 @@
 # 2018～2019第2学期数学建模作业合集
 
-| 作者 | 萌萌の尾巴             |
-| ---- | ---------------------- |
-| 邮箱 | Legend_1949@vip.qq.com |
+| 作者       | 邮箱                |
+| ---------- | ------------------- |
+| 萌萌の尾巴 | Legend_1949@126.com |
 
 ## 前言
 
@@ -19,3 +19,4 @@
 * [实验七](https://github.com/Drogon1573/Math_Modeling/blob/master/Experiment7/Task7.md)
 * [实验八](https://drogon1573.github.io/Math_Modeling/Experiment8/Task8.html)
 * [实验九](https://drogon1573.github.io/Math_Modeling/Experiment9/Task9.html)
+* [结课论文](https://drogon1573.github.io/Math_Modeling/Final_Thesis/Final.html)
