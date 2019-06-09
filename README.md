@@ -19,4 +19,4 @@
 * [实验七](https://github.com/Drogon1573/Math_Modeling/blob/master/Experiment7/Task7.md)
 * [实验八](https://drogon1573.github.io/Math_Modeling/Experiment8/Task8.html)
 * [实验九](https://drogon1573.github.io/Math_Modeling/Experiment9/Task9.html)
-* [结课论文](https://drogon1573.github.io/Math_Modeling/Final_Thesis/Final.html)
+* [结课论文](https://github.com/Drogon1573/Math_Modeling/blob/master/Final_Thesis/Final.md)

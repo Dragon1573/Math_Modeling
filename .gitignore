@@ -29,3 +29,10 @@ octave-workspace
 
 # Visual Studio Code settings file
 .vscode/
+
+# Microsoft Office Word file
+*.doc
+*.docx
+*.docm
+*.doct
+*.dotm
