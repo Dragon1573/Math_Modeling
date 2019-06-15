@@ -1,0 +1,65 @@
+---
+title: "聚类分析与主成分分析"
+output: GitHub_Markdown_File
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    echo = TRUE,
+    message = TRUE,
+    warning = TRUE
+)
+```
+
+# 读取数据并进行聚类分析
+
+```{r, echo = FALSE}
+library(readxl)
+X20_Major_GDP <-
+    read_excel(
+        "D:/Program_Files_(x64)/Git/Repos/Math_Modeling/Final_Thesis/data/20_Major_GDP.xls",
+        range = "A4:C40",
+        col_types = c("text", "skip", "numeric")
+    )
+distances <- dist(X20_Major_GDP)
+clusted <- hclust(distances)
+plot(clusted, labels = X20_Major_GDP$"地区", main = "2017年全国主要城市国内生产总值聚类图")
+```
+
+# 读取数据并进行主成分分析
+
+```{r, echo=FALSE}
+X2017_Major_Economic <-
+    read.csv(
+        "D:/Program_Files_(x64)/Git/Repos/Math_Modeling/Final_Thesis/data/17_Economic.csv",
+        header = TRUE
+    )
+cor(X2017_Major_Economic[, 2:13])
+PCA = princomp(X2017_Major_Economic[, 2:13], cor = TRUE)
+summary(PCA)
+PCA$loadings
+
+screeplot(PCA, type = "lines")
+
+PCA$scores[, 1:2]
+```
+
+# 计算综合评分
+
+```{r, echo=FALSE}
+PC = (
+    PCA$sdev[1] ^ 2 * PCA$scores[, 1]
+    + PCA$sdev[2] ^ 2 * PCA$scores[, 2]
+) / (
+    PCA$sdev[1] ^ 2 * PCA$sdev[2] ^ 2
+)
+Ranked <- cbind(PCA$scores[, 1:2], PC, "Rank" = rank(-PC))
+rownames(Ranked) <- X2017_Major_Economic[, 1]
+Ranked
+```
+
+# 绘制主成分图
+
+```{r, echo=FALSE}
+plot(PCA$scores[, 1], PCA$scores[, 2])
+```
