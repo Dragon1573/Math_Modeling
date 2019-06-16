@@ -34,5 +34,6 @@ octave-workspace
 *.doc
 *.docx
 *.docm
-*.doct
+*.dot
+*.dotx
 *.dotm
